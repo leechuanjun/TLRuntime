@@ -4,5 +4,23 @@ Objective-C Runtime是一个将C语言转化为面向对象语言的扩展。 �
 # 调用项目内容
 
 ## 1、Objective-C的元素认知
+    1.1 id和Class
+    1.2 SEL
+    1.3 IMP
+    1.4 Method
+    1.5 Ivar
+    1.6 objc_property_t
+    1.7 Cache
+    1.8 Catagory
+    
 ## 2、Objective-C的消息传递
+    2.1 基本消息传递
+    2.2 消息动态解析
+    
 ## 3、Runtime实战
+    3.1 问好篇
+    3.2 特征篇
+    3.3 增加新技能篇
+    3.4 资料归档篇
+    3.5 资料转换篇
+    3.6 歌唱篇(验证一下上文《2.2 消息动态解析》)

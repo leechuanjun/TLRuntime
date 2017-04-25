@@ -23,40 +23,40 @@ void sayFunction(id self, SEL _cmd, id some) {
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // 动态创建对象 创建一个Person 继承自 NSObject类
-        Class People = objc_allocateClassPair([NSObject class], "Person", 0);
+        // 动态创建对象 创建一个People 继承自 NSObject类
+        Class TLPeople = objc_allocateClassPair([NSObject class], "People", 0);
         
         // 为该类添加NSString *_name成员变量
-        class_addIvar(People, "_name", sizeof(NSString*), log2(sizeof(NSString*)), @encode(NSString*));
+        class_addIvar(TLPeople, "_name", sizeof(NSString*), log2(sizeof(NSString*)), @encode(NSString*));
         // 为该类添加int _age成员变量
-        class_addIvar(People, "_age", sizeof(int), sizeof(int), @encode(int));
+        class_addIvar(TLPeople, "_age", sizeof(int), sizeof(int), @encode(int));
         
         // 注册方法名为say的方法
-        SEL s = sel_registerName("say:");
+        SEL selSay = sel_registerName("say:");
         // 为该类增加名为say的方法
-        class_addMethod(People, s, (IMP)sayFunction, "v@:@");
+        class_addMethod(TLPeople, selSay, (IMP)sayFunction, "v@:@");
         
         // 注册该类
-        objc_registerClassPair(People);
+        objc_registerClassPair(TLPeople);
         
         // 创建一个类的实例
-        id peopleInstance = [[People alloc] init];
+        id tlPeopleInstance = [[TLPeople alloc] init];
         
         // KVC 动态改变 对象peopleInstance 中的实例变量
-        [peopleInstance setValue:@"TridonLee" forKey:@"name"];
+        [tlPeopleInstance setValue:@"TridonLee" forKey:@"name"];
         
         // 从类中获取成员变量Ivar
-        Ivar ageIvar = class_getInstanceVariable(People, "_age");
-        // 为peopleInstance的成员变量赋值
-        object_setIvar(peopleInstance, ageIvar, @18);
+        Ivar ageIvar = class_getInstanceVariable(TLPeople, "_age");
+        // 为tlPeopleInstance的成员变量赋值
+        object_setIvar(tlPeopleInstance, ageIvar, @18);
         
-        // 调用 peopleInstance 对象中的 s 方法选择器对于的方法
-        // objc_msgSend(peopleInstance, s, @"大家好!"); // 这样写也可以，请看我博客说明
-        ((void (*)(id, SEL, id))objc_msgSend)(peopleInstance, s, @"大家好");
-        peopleInstance = nil; //当People类或者它的子类的实例还存在，则不能调用objc_disposeClassPair这个方法；因此这里要先销毁实例对象后才能销毁类；
+        // 调用 tlPeopleInstance 对象中的 selSay 方法选择器对于的方法
+//        objc_msgSend(tlPeopleInstance, selSay, @"大家好!"); // 这样写也可以
+        ((void (*)(id, SEL, id))objc_msgSend)(tlPeopleInstance, selSay, @"大家好");
+        tlPeopleInstance = nil; //当TLPeople类或者它的子类的实例还存在，则不能调用objc_disposeClassPair这个方法；因此这里要先销毁实例对象后才能销毁类；
         
         // 销毁类
-        objc_disposeClassPair(People);
+        objc_disposeClassPair(TLPeople);
     }
     return 0;
 }

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Samples/TLSample002/TLSample002.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Samples/TLSample001/TLSample001.xcodeproj">
    </FileRef>
 </Workspace>

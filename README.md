@@ -23,5 +23,5 @@ Objective-C Runtime是一个将C语言转化为面向对象语言的扩展。 �
     3.3 增加新技能篇(TLSample003)
     3.4 资料归档篇(TLSample004)
     3.5 资料转换篇(TLSample005)
-    3.6 歌唱篇(验证一下上文《2.2 消息动态解析》TLSample006)
+    3.6 歌唱篇(验证一下上文《2.2 消息动态解析》TLSample006~TLSample008)
     
